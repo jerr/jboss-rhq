@@ -82,8 +82,8 @@ public class HudsonJSONUtility {
 
     public static String getVersion(String path) {
         try {
-        URL url = new URL(path);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            URL url = new URL(path);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             InputStream is = connection.getInputStream();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -95,10 +95,10 @@ public class HudsonJSONUtility {
                 if (line == null) {
                     break;
                 } else {
-                    int verIndex = line.indexOf("Hudson ver. ");
-                    if (verIndex >=0) {
+                    if(line.contains("Hudson ver.") || line.contains("Jenkins ver.") ) {
+                	int verIndex = line.indexOf(" ver. ");
                         int endIndex = line.indexOf((int) '<', verIndex);
-                        String version = line.substring(verIndex + "Hudson ver. ".length(), endIndex);
+                        String version = line.substring(verIndex + " ver. ".length(), endIndex);
                         return version;
                     }
                     builder.append(line);
@@ -114,11 +114,11 @@ public class HudsonJSONUtility {
 
 
     public static void main(String[] args) throws JSONException {
-        System.out.println("VERSION: " + getVersion("http://hudson.jboss.org/hudson"));
+        System.out.println("VERSION: " + getVersion("https://hudson.jboss.org/hudson/"));
         
 
 
-        JSONObject object = getData("http://hudson.jboss.org/hudson/job/DNA continuous on JDK1.5", 0);
+        JSONObject object = getData("https://hudson.jboss.org/hudson/view/Drools jBPM", 1);
         System.out.println("Got it\n" + object.toString(2));
 
         System.out.println(object.get("description"));

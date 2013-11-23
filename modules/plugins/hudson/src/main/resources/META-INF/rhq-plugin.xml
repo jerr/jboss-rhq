@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <plugin name="hudson"
-        displayName="Hudson"
+        displayName="Hudson/Jenkins"
         package="org.rhq.plugins.hudson"
-        description="Monitoring of Hudson integration build servers"
+        description="Monitoring of Hudson or Jenkins integration build servers"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="urn:xmlns:rhq-plugin"
         xmlns:c="urn:xmlns:rhq-configuration">
     
     
-    <server name="Hudson Server"
+    <server name="Hudson/Jenkins Server"
         discovery="HudsonDiscoveryComponent"
         class="HudsonServerComponent"
         supportsManualAdd="true">
 
         <plugin-configuration>
-            <c:simple-property name="urlBase" description="The root url path to your hudson server interface (e.g. http://hudson.jboss.org/hudson/)"/>
+            <c:simple-property name="urlBase" description="The root url path to your hudson or jenkins server interface (e.g. https://hudson.jboss.org/hudson/)"/>
         </plugin-configuration>
         
-        <service name="Hudson Project"
+        <service name="Hudson/Jenkins Project"
             discovery="HudsonProjectDiscoveryComponent"
             class="HudsonProjectComponent">
             
